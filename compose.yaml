@@ -1,0 +1,23 @@
+version: '3.1'
+
+services:
+  postgres:
+    image: postgres
+    container_name: meu_container_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: db_lord_of_the_rings_personagens
+      POSTGRES_USER: dry
+      POSTGRES_PASSWORD: root
+    ports:
+      - "5432:5432"
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks:
+      - minha-rede
+
+volumes:
+  pg_data:
+
+networks:
+  minha-rede:
