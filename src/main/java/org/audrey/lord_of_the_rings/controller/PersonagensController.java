@@ -1,5 +1,6 @@
 package org.audrey.lord_of_the_rings.controller;
 
+import jakarta.validation.Valid;
 import org.audrey.lord_of_the_rings.model.Personagens;
 import org.audrey.lord_of_the_rings.repository.PersonagensRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,6 +43,11 @@ public class PersonagensController {
     @GetMapping("casa/{casa}")
     public ResponseEntity<List <Personagens>> getByCasa(@PathVariable String casa){
         return  ResponseEntity.ok(personagensRepository.findAllByCasaContainingIgnoreCase(casa));
+    }
+
+    @PostMapping
+    public ResponseEntity <Personagens> post(@Valid @RequestBody Personagens meuPersonagem) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(personagensRepository.save(meuPersonagem));
     }
 
 }
