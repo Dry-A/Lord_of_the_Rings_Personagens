@@ -29,4 +29,19 @@ public class PersonagensController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
+    @GetMapping("/nome/{nome}")
+    public ResponseEntity<List <Personagens> > getByNome(@PathVariable String nome) {
+        return ResponseEntity.ok(personagensRepository.findAllByNomeContainingIgnoreCase(nome));
+    }
+
+    @GetMapping("/arma/{arma}")
+    public ResponseEntity<List <Personagens>> getByArma(@PathVariable String arma) {
+        return ResponseEntity.ok(personagensRepository.findAllByArmaContainingIgnoreCase(arma));
+    }
+
+    @GetMapping("casa/{casa}")
+    public ResponseEntity<List <Personagens>> getByCasa(@PathVariable String casa){
+        return  ResponseEntity.ok(personagensRepository.findAllByCasaContainingIgnoreCase(casa));
+    }
+
 }
