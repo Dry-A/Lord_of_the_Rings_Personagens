@@ -50,4 +50,12 @@ public class PersonagensController {
         return ResponseEntity.status(HttpStatus.CREATED).body(personagensRepository.save(meuPersonagem));
     }
 
+    @PutMapping
+    public ResponseEntity<Personagens> put(@Valid @RequestBody Personagens meuPersonagem) {
+        return personagensRepository.findById(meuPersonagem.getId())
+                .map(resposta -> ResponseEntity.status(HttpStatus.OK)
+                        .body(personagensRepository.save(meuPersonagem)))
+                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+    }
+
 }
