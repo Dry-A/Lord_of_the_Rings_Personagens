@@ -53,7 +53,8 @@ public class PersonagensController {
     }
 
     @PutMapping
-    public ResponseEntity <Personagens> put(@Valid @RequestBody Personagens meuPersonagem) {
+    public ResponseEntity<Personagens> put(@Valid @RequestBody Personagens meuPersonagem) {
+
         return objetoPersonagensRepository.findById(meuPersonagem.getId())
                 .map(resposta -> ResponseEntity.status(HttpStatus.OK)
                         .body(objetoPersonagensRepository.save(meuPersonagem)))
