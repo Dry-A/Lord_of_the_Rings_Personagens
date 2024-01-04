@@ -42,11 +42,6 @@ public class PersonagensController {
         return ResponseEntity.ok(objetoPersonagensRepository.findAllByArmaContainingIgnoreCase(arma));
     }
 
-    @GetMapping("casa/{casa}")
-    public ResponseEntity<List <Personagens>> getByCasa(@PathVariable String casa){
-        return  ResponseEntity.ok(objetoPersonagensRepository.findAllByCasaContainingIgnoreCase(casa));
-    }
-
     @PostMapping
     public ResponseEntity <Personagens> post(@Valid @RequestBody Personagens meuPersonagem) {
         return ResponseEntity.status(HttpStatus.CREATED).body(objetoPersonagensRepository.save(meuPersonagem));

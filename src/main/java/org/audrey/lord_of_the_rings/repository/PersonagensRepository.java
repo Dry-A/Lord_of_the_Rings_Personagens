@@ -14,6 +14,5 @@ public interface PersonagensRepository extends JpaRepository<Personagens, Long> 
 
     public List <Personagens> findAllByArmaContainingIgnoreCase(@Param("arma")String arma);
 
-    public List <Personagens> findAllByCasaContainingIgnoreCase(@Param("casa")String casa);
 
 }
