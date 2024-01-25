@@ -2,6 +2,7 @@ package org.audrey.lord_of_the_rings.controller;
 
 import jakarta.validation.Valid;
 import org.audrey.lord_of_the_rings.model.Personagens;
+import org.audrey.lord_of_the_rings.repository.CasaRepository;
 import org.audrey.lord_of_the_rings.repository.PersonagensRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -19,6 +20,9 @@ public class PersonagensController {
 
     @Autowired
     private PersonagensRepository objetoPersonagensRepository;
+
+    @Autowired
+    private CasaRepository objetoCasaRepository;
 
     @GetMapping
     public ResponseEntity<List<Personagens>> getAll(){
@@ -44,16 +48,25 @@ public class PersonagensController {
 
     @PostMapping
     public ResponseEntity <Personagens> post(@Valid @RequestBody Personagens meuPersonagem) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(objetoPersonagensRepository.save(meuPersonagem));
+        if(objetoCasaRepository.existsById(meuPersonagem.getCasa().getId()))
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(objetoPersonagensRepository.save(meuPersonagem));
+
+        throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Casa não existe!", null);
     }
 
     @PutMapping
     public ResponseEntity<Personagens> put(@Valid @RequestBody Personagens meuPersonagem) {
+        if(objetoPersonagensRepository.existsById(meuPersonagem.getId())){
 
-        return objetoPersonagensRepository.findById(meuPersonagem.getId())
-                .map(resposta -> ResponseEntity.status(HttpStatus.OK)
-                        .body(objetoPersonagensRepository.save(meuPersonagem)))
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
+            if(objetoCasaRepository.existsById(meuPersonagem.getCasa().getId()))
+                return ResponseEntity.status(HttpStatus.OK)
+                        .body(objetoPersonagensRepository.save(meuPersonagem));
+
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Casa Não Existe!", null);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
     }
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
