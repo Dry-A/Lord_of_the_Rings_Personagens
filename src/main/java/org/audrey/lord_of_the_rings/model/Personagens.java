@@ -20,15 +20,17 @@ public class Personagens {
     @NotBlank(message = "Nome é obrigatório!")
     @Size(min = 3, max = 50, message = "Nome deve conter no mínimo 6 e no máximo 100 caracteres.")
     private String nome;
-    @NotNull
-    private int forca;
     @NotBlank
     private String arma;
     @NotBlank
-    private String poder;
+    private String poder_maximo;
 
     @ManyToOne
     @JsonIgnoreProperties("personagem")
     private Casa casa;
+
+    @ManyToOne
+    @JsonIgnoreProperties("personagem")
+    private Usuario usuario;
 
 }
