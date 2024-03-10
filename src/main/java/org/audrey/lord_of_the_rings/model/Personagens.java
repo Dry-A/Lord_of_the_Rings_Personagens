@@ -24,6 +24,9 @@ public class Personagens {
     private String arma;
     @NotBlank
     private String poder_maximo;
+    @NotBlank
+    private String mbti;
+
 
     @ManyToOne
     @JsonIgnoreProperties("personagem")

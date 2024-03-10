@@ -8,6 +8,8 @@ import lombok.Getter;
 import lombok.Setter;
 import java.util.List;
 
+import org.audrey.lord_of_the_rings.dto.UsuarioDTO;
+
 @Getter
 @Setter
 @Entity
@@ -33,4 +35,14 @@ public class Usuario {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "usuario", cascade = CascadeType.REMOVE)
     @JsonIgnoreProperties("usuario")
     private List<Personagens> personagem;
+
+    public static UsuarioDTO fromUsuario(Usuario usuario){
+        
+        UsuarioDTO usuarioDTO = new UsuarioDTO();
+        usuarioDTO.setNome(usuario.getNome());
+        usuarioDTO.setUsuario(usuario.getUsuario());
+
+        return usuarioDTO;
+
+    }
 }
