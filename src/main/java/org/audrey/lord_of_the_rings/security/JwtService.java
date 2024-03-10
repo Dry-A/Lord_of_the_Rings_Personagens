@@ -16,7 +16,7 @@ import io.jsonwebtoken.security.Keys;
 @Component
 public class JwtService {
 										
-	public static final String SECRET = "e345e3728f4279dbe5dd82244d096e5e4600a48a0c07caa7a57e198f4499b13f";
+	public static final String SECRET = "941937cc33fd53a3622360ab8231360544eba88210644602ca7477b8d5630cb0";
 			
 	private Key getSignKey() {
 		byte[] keyBytes = Decoders.BASE64.decode(SECRET);
@@ -56,7 +56,7 @@ public class JwtService {
 					.setClaims(claims)
 					.setSubject(userName)
 					.setIssuedAt(new Date(System.currentTimeMillis()))
-					.setExpiration(new Date(System.currentTimeMillis() + 1000 * 60 * 60))
+					.setExpiration(new Date(System.currentTimeMillis() + 3000 * 60 * 60))
 					.signWith(getSignKey(), SignatureAlgorithm.HS256).compact();
 	}
 
