@@ -8,7 +8,8 @@
 <h4>Postgre</h4>
 <h4>Dbeaver</h4>
 <h4>Git e Github</h4>
-
+<h4>Teste Unitário</h4>
+<h4>Teste Integrado</h4>
 
  <h3 style="color: cornflowerblue"> <strong> Dependências iniciais:
 <ol>
