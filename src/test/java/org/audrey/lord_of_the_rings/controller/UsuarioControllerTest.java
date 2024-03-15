@@ -54,10 +54,10 @@ public class UsuarioControllerTest {
     public void naoDeveDuplicarUsuario() {
 
         meuUsuarioService.cadastrarUsuario(new Usuario(0L,
-                "Maria da Silva", "maria_silva@email.com.br", "13465278", "-"));
+                "Marcio Andrey", "marcio@email.com.br", "134652", "-"));
 
         HttpEntity<Usuario> corpoRequisicao = new HttpEntity<Usuario>(new Usuario(0L,
-                "Maria da Silva", "maria_silva@email.com.br", "13465278", "-"));
+                "Marcio Andrey", "marcio@email.com.br", "134652", "-"));
 
         ResponseEntity<Usuario> corpoResposta = meuTestRest
                 .exchange("/usuarios/cadastrar", HttpMethod.POST, corpoRequisicao, Usuario.class);
