@@ -54,24 +54,24 @@ public class BasicSecurityConfig {
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 
-    	http
-	        .sessionManagement(management -> management
-	                .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	        		.csrf(csrf -> csrf.disable())
-	        		.cors(withDefaults());
+        http
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .csrf(csrf -> csrf.disable())
+                .cors(withDefaults());
 
-    	http
-	        .authorizeHttpRequests((auth) -> auth
-	                .requestMatchers("/usuarios/logar").permitAll()
-	                .requestMatchers("/usuarios/cadastrar").permitAll()
-	                .requestMatchers("/error/**").permitAll()
-	                .requestMatchers(HttpMethod.OPTIONS).permitAll()
-	                .anyRequest().authenticated())
-	        .authenticationProvider(authenticationProvider())
-	        .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
-	        .httpBasic(withDefaults());
+        http
+                .authorizeHttpRequests((auth) -> auth
+                        .requestMatchers("/usuarios/logar").permitAll()
+                        .requestMatchers("/usuarios/cadastrar").permitAll()
+                        .requestMatchers("/error/**").permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .anyRequest().authenticated())
+                .authenticationProvider(authenticationProvider())
+                .addFilterBefore(authFilter, UsernamePasswordAuthenticationFilter.class)
+                .httpBasic(withDefaults());
 
-		return http.build();
+        return http.build();
 
     }
 
