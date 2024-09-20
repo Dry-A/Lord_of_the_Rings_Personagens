@@ -1,7 +1,9 @@
 package org.audrey.lord_of_the_rings.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.Getter;
@@ -23,7 +25,9 @@ public class Usuario {
     @NotNull(message = "O atributo nome deve ser preenchido!")
     private String nome;
 
-    @NotNull(message = "O atributo Usuario deve ser preenchido! Use um email ou nickname")
+    @Schema(example = "email@email.com.br")
+    @NotNull(message = "O Atributo Usuário é Obrigatório!")
+    @Email(message = "O Atributo Usuário deve ser um email válido!")
     private String usuario;
 
     @NotNull(message = "Você deve criar uma senha!")
